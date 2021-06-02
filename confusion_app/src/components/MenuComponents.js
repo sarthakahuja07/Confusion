@@ -1,75 +1,63 @@
-import React from 'react';
+import React , { useState }from 'react';
 
 function Menu(props) {
 
-    var state = {
-        dishes: [
-            {
-                id: 0,
-                name: "Uthappizza",
-                image: "assets/images/uthappizza.png",
-                category: "mains",
-                label: "Hot",
-                price: "4.99",
-                description:
-                    "A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.",
-            },
-            {
-                id: 1,
-                name: "Zucchipakoda",
-                image: "assets/images/zucchipakoda.png",
-                category: "appetizer",
-                label: "",
-                price: "1.99",
-                description:
-                    "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
-            },
-            {
-                id: 2,
-                name: "Vadonut",
-                image: "assets/images/vadonut.png",
-                category: "appetizer",
-                label: "New",
-                price: "1.99",
-                description:
-                    "A quintessential ConFusion experience, is it a vada or is it a donut?",
-            },
-            {
-                id: 3,
-                name: "ElaiCheese Cake",
-                image: "assets/images/elaicheesecake.png",
-                category: "dessert",
-                label: "",
-                price: "2.99",
-                description:
-                    "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms",
-            },
-        ]
-    }
+	const [selectedItem, setselectedItem] = useState(null);
 
 
-    var menu = state.dishes.map((dish) => {
-        return (
-            <div className="mt-5">
-                <div class="d-flex border p-3">
-                    <img src={dish.image} alt={dish.name}
-                        class="flex-shrink-0 me-3 rounded-circle"></img>
-                    <div>
-                        <h4>{dish.name}</h4>
-                        <p>{dish.description}</p>
-                    </div>
-                </div>
-            </div>
-        );
-    })
+	function selectDish(dish) {
+		setselectedItem(dish);
+	}
 
-    return (
-        <div className="container">
-            <div className="row">
-                {menu}
-            </div>
-        </div>
-    );
+	function renderCard() {
+		if (selectedItem != null) {
+			var dish = selectedItem;
+			return (
+				<div className="mt-5 col-12 col-md-6 ">
+					<div className="card p-2 text-black bg-primary">
+						<img src={dish.image} alt={dish.name} className="card-img-top"></img>
+						<div className="card-body">
+							<h5 className="card-title">{dish.name}</h5>
+							<p className="card-text">{dish.description}</p>
+							<a href="/" className="btn btn-primary">Go somewhere</a>
+						</div>
+					</div>
+				</div>
+			);
+
+		}
+		else {
+			return <div></div>
+		}
+		
+
+	}
+
+
+
+	var menu = props.dishes.map((dish) => {
+		return (
+			<div key={dish.id}  className="mt-5 col-12 col-md-6 ">
+				<div onClick={() => selectDish(dish)} className="card p-2 text-white bg-danger">
+					<img src={dish.image} alt={dish.name} className="card-img-top"></img>
+					<div className="card-body">
+						<h5 className="card-title">{dish.name}</h5>
+					</div>
+				</div>
+			</div>
+		);
+	})
+
+	return (
+		<div className="container">
+			<div className="row">
+				{menu}
+			</div>
+			<div className="row">
+				{renderCard()}
+			</div>
+		</div>
+	);
 }
 
 export default Menu;

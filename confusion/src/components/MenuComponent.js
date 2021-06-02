@@ -1,87 +1,69 @@
 import React, { Component } from "react";
-import { Media } from "reactstrap";
+// import { Media } from "reactstrap";
+import {
+	Card, CardText, CardBody, CardLink,
+	CardTitle, CardSubtitle,CardImg
+} from 'reactstrap';
+
 class Menu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dishes: [
-                {
-                    id: 0,
-                    name: "Uthappizza",
-                    image: "assets/images/uthappizza.png",
-                    category: "mains",
-                    label: "Hot",
-                    price: "4.99",
-                    description:
-                        "A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.",
-                },
-                {
-                    id: 1,
-                    name: "Zucchipakoda",
-                    image: "assets/images/zucchipakoda.png",
-                    category: "appetizer",
-                    label: "",
-                    price: "1.99",
-                    description:
-                        "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
-                },
-                {
-                    id: 2,
-                    name: "Vadonut",
-                    image: "assets/images/vadonut.png",
-                    category: "appetizer",
-                    label: "New",
-                    price: "1.99",
-                    description:
-                        "A quintessential ConFusion experience, is it a vada or is it a donut?",
-                },
-                {
-                    id: 3,
-                    name: "ElaiCheese Cake",
-                    image: "assets/images/elaicheesecake.png",
-                    category: "dessert",
-                    label: "",
-                    price: "2.99",
-                    description:
-                        "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms",
-                },
-            ],
-        };
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedItem: null
+		};
+	}
 
-    render() {
-        var menu = this.state.dishes.map((dish) => {
-            return (
-                <div key={dish.id} className="mt-5 col-12">
-                    <Media tag="li" className="border p-3">
-                        <Media left middle href="#">
-                            <Media
-                                object 
-                                src={dish.image}
-                                alt={dish.name}
-                            />
-                        </Media>
-                        <Media body className="ml-5">
-                            <Media heading>
-                                {dish.name}
-                            </Media>
-                            <p>
-                                {dish.description}
-                            </p>
-                        </Media>
-                    </Media>
-                </div>
-            );
-        });
+	selectDish(dish) {
+		this.setState({ selectedItem: dish });
+	}
 
-        return (
-            <div className="container">
-                <div className="row">
-                    <Media list>{menu}</Media>
-                </div>
-            </div>
-        );
-    }
+	renderCard() {
+		if (this.state.selectedItem != null) {
+			var dish=this.state.selectedItem;
+			return (
+				<Card body inverse color="danger" className="col-6">
+					<CardImg top width="100%" src={dish.image} alt={dish.name} />
+					<CardBody>
+						<CardTitle tag="h5">{dish.name}</CardTitle>
+						<CardText>{dish.description}</CardText>
+					</CardBody>
+				</Card>
+			);
+		}
+		else {
+
+			return <div></div>
+		}
+
+
+	}
+
+
+	render() {
+		var menu = this.props.dishes.map((dish) => {
+			return (
+				<div key={dish.id} className="mt-5 col-12 col-md-6">
+					<Card onClick={() => this.selectDish(dish)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+						<CardBody>
+							<CardTitle tag="h5">{dish.name}</CardTitle>
+						</CardBody>
+						<img width="100%" src={dish.image} alt={dish.name} />
+					</Card>
+				</div>
+			);
+		});
+
+		return (
+			<div className="container">
+				<div className="row">
+					{menu}
+				</div>
+				<div className="row mt-5">
+					{this.renderCard()}
+				</div>
+			</div>
+		);
+	}
 }
 
 

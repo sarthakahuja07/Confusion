@@ -1,11 +1,13 @@
 
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
 import Menu from "./components/MenuComponents";
 import {
   Navbar,
   NavbarBrand
 } from 'reactstrap';
+
+import Dishes from './shared/dishes';
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
         <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
       </div>
     </Navbar>
-    <Menu />
+    <Menu dishes={Dishes}/>
     </div> 
   );
 }

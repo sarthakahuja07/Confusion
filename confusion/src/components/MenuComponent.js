@@ -15,7 +15,8 @@ class Menu extends Component {
 		};
 	}
 
-	selectDish(dish) {
+	selectDish(dish,e) {
+		e.preventDefault();
 		this.setState({ selectedItem: dish });
 	}
 
@@ -23,7 +24,7 @@ class Menu extends Component {
 		var menu = this.props.dishes.map((dish) => {
 			return (
 				<div key={dish.id} className="mt-5 col-12 col-md-5">
-					<Card onClick={() => this.selectDish(dish)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+					<Card onClick={(e) => this.selectDish(dish,e)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
 						<CardBody>
 							<CardTitle tag="h5">{dish.name}</CardTitle>
 						</CardBody>

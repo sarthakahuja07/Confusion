@@ -3,6 +3,7 @@ import {
 	Card, CardText, CardBody, CardLink,
 	CardTitle, CardSubtitle, CardImg
 } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 
 
 class DishDetail extends Component {
@@ -14,8 +15,21 @@ class DishDetail extends Component {
 
 	render() {
 
+		
 
-		if(this.props.dish!=null){
+		if (this.props.dish != null) {
+			const comments = this.props.dish.comments.map((comment) => {
+				var d=new Date(comment.date);
+				console.log(d);
+				return (
+					<ListGroupItem key={comment.id}>
+						<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
+						<ListGroupItemText>
+							--{comment.author} , {d.toUTCString()}
+						   </ListGroupItemText>
+					</ListGroupItem>
+				)
+			});
 			return (
 				<div className="row mt-5">
 					<div className="col-12 col-md-5 ">
@@ -31,13 +45,17 @@ class DishDetail extends Component {
 							</CardBody>
 						</Card>
 					</div>
+					<div className="m-1 col-12 col-md-5">
+						<h4>Comments</h4>
+						{comments}
+					</div>
 				</div>
-	
+
 			);
-		}else{
+		} else {
 			return null;
 		}
-		
+
 	}
 }
 

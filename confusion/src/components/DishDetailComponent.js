@@ -13,50 +13,62 @@ class DishDetail extends Component {
 		this.state = {};
 	}
 
-	render() {
-
-		
-
+	renderDish() {
 		if (this.props.dish != null) {
-			const comments = this.props.dish.comments.map((comment) => {
-				var d=new Date(comment.date);
-				console.log(d);
-				return (
-					<ListGroupItem key={comment.id}>
-						<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
-						<ListGroupItemText>
-							--{comment.author} , {d.toUTCString()}
-						   </ListGroupItemText>
-					</ListGroupItem>
-				)
-			});
 			return (
-				<div className="row mt-5">
-					<div className="col-12 col-md-5 ">
-						<Card body inverse color="danger">
-							<CardImg top width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
-							<CardBody>
-								<CardTitle tag="h5">
-									{this.props.dish.name}
-								</CardTitle>
-								<CardText>
-									{this.props.dish.description}
-								</CardText>
-							</CardBody>
-						</Card>
-					</div>
-					<div className="m-1 col-12 col-md-5">
-						<h4>Comments</h4>
-						{comments}
-					</div>
+				<div className="col-12 col-md-5 ">
+					<Card body inverse color="danger">
+						<CardImg top width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
+						<CardBody>
+							<CardTitle tag="h5">
+								{this.props.dish.name}
+							</CardTitle>
+							<CardText>
+								{this.props.dish.description}
+							</CardText>
+						</CardBody>
+					</Card>
 				</div>
-
 			);
 		} else {
 			return null;
 		}
 
 	}
+
+	renderComments() {
+		if (this.props.dish != null) {
+			const comments = this.props.dish.comments.map((comment) => {
+				var d = new Date(comment.date);
+				console.log(d);
+				return (
+					<ListGroupItem key={comment.id}>
+						<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
+						<ListGroupItemText>
+							--{comment.author} , {d.toUTCString()}
+						</ListGroupItemText>
+					</ListGroupItem>
+				)
+			});
+		}else{
+			return null;
+		}
+	}
+
+
+
+		render() {
+			return (
+				<div className="row mt-5">
+					{this.renderDish()}
+					<div className="m-1 col-12 col-md-5">
+						<h4>Comments</h4>
+						{this.renderComments()}
+					</div>
+				</div>
+
+			);
+		}	
 }
 
 export default DishDetail;

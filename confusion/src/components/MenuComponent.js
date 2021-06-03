@@ -1,19 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import {
 	Card, CardText, CardBody, CardLink,
 	CardTitle, CardSubtitle, CardImg
 } from 'reactstrap';
 
 
-class Menu extends Component {
-	constructor(props) {
-		super(props);
-	}
-	render() {
-		var menu = this.props.dishes.map((dish) => {
+function Menu(props){
+
+		var menu = props.dishes.map((dish) => {
 			return (
 				<div key={dish.id} className="mt-5 col-12 col-md-5">
-					<Card onClick={() => this.props.onClick(dish.id)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+					<Card onClick={() => props.onClick(dish.id)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
 						<CardBody>
 							<CardTitle tag="h5">{dish.name}</CardTitle>
 						</CardBody>
@@ -30,7 +27,7 @@ class Menu extends Component {
 				</div>
 			</div>
 		);
-	}
+	
 }
 
 

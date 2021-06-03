@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
 	Card, CardText, CardBody, CardLink,
 	CardTitle, CardSubtitle, CardImg
@@ -6,37 +6,35 @@ import {
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 
 
-class DishDetail extends Component {
-	constructor(props) {
-		super(props);
-	}
+function DishDetail(props){
 
-	renderDish() {
-		if (this.props.dish != null) {
+
+	function renderDish() {
+		if (props.dish != null) {
 			return (
 				<div className="col-12 col-md-5 ">
 					<Card body inverse color="danger">
-						<CardImg top width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
+						<CardImg top width="100%" src={props.dish.image} alt={props.dish.name} />
 						<CardBody>
 							<CardTitle tag="h5">
-								{this.props.dish.name}
+								{props.dish.name}
 							</CardTitle>
 							<CardText>
-								{this.props.dish.description}
+								{props.dish.description}
 							</CardText>
 						</CardBody>
 					</Card>
 				</div>
 			);
-		} else {
+		}else {
 			return null;
 		}
 
 	}
 
-	renderComments() {
-		if (this.props.dish != null) {
-			const comments = this.props.dish.comments.map((comment) => {
+	function renderComments() {
+		if (props.dish != null) {
+			const comments = props.dish.comments.map((comment) => {
 				var d = new Date(comment.date);
 				console.log(d);
 				return (
@@ -61,19 +59,16 @@ class DishDetail extends Component {
 			return null;
 		}
 	}
-
-
-
-	render() {
 		return (
-			<div className="container">
-				<div className="row mt-5">
-					{this.renderDish()}
-					{this.renderComments()}
-				</div>
+		<div className="container">
+			<div className="row mt-5">
+				{renderDish()}
+				{renderComments()}
 			</div>
-		);
-	}
+		</div>
+	);
+
+	
 }
 
 export default DishDetail;

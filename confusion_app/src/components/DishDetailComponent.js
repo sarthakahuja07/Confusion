@@ -41,9 +41,8 @@ function DishDetail(props) {
 			</div>
 		);
 	}
-	if (props.dish != null) {
-		
 
+	if (props.dish != null) {
 		return (
 
 			<div className="container">

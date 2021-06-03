@@ -1,30 +1,19 @@
 import React, { Component } from "react";
-// import { Media } from "reactstrap";
 import {
 	Card, CardText, CardBody, CardLink,
 	CardTitle, CardSubtitle, CardImg
 } from 'reactstrap';
 
-import DishDetail from './DishDetailComponent'
 
 class Menu extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			selectedItem: null
-		};
 	}
-
-	selectDish(dish,e) {
-		e.preventDefault();
-		this.setState({ selectedItem: dish });
-	}
-
 	render() {
 		var menu = this.props.dishes.map((dish) => {
 			return (
 				<div key={dish.id} className="mt-5 col-12 col-md-5">
-					<Card onClick={(e) => this.selectDish(dish,e)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
+					<Card onClick={() => this.props.onClick(dish.id)} body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
 						<CardBody>
 							<CardTitle tag="h5">{dish.name}</CardTitle>
 						</CardBody>
@@ -39,7 +28,6 @@ class Menu extends Component {
 				<div className="row">
 					{menu}
 				</div>
-				<DishDetail dish={this.state.selectedItem} />
 			</div>
 		);
 	}

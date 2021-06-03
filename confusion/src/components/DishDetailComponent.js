@@ -9,8 +9,6 @@ import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } fro
 class DishDetail extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {};
 	}
 
 	renderDish() {
@@ -38,11 +36,11 @@ class DishDetail extends Component {
 
 	renderComments() {
 		if (this.props.dish != null) {
-			const comments= this.props.dish.comments.map((comment) => {
+			const comments = this.props.dish.comments.map((comment) => {
 				var d = new Date(comment.date);
 				console.log(d);
 				return (
-					<div className= "mt-2" key={comment.id}>
+					<div className="mt-2" key={comment.id}>
 						<ListGroupItem >
 							<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
 							<ListGroupItemText>
@@ -53,7 +51,7 @@ class DishDetail extends Component {
 
 				)
 			});
-			return(
+			return (
 				<div className="m-1 col-12 col-md-5">
 					<h4> Comments </h4>
 					{comments}
@@ -68,11 +66,12 @@ class DishDetail extends Component {
 
 	render() {
 		return (
-			<div className="row mt-5">
-				{this.renderDish()}
-				{this.renderComments()}
+			<div className="container">
+				<div className="row mt-5">
+					{this.renderDish()}
+					{this.renderComments()}
+				</div>
 			</div>
-
 		);
 	}
 }

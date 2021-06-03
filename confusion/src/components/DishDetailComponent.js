@@ -38,37 +38,43 @@ class DishDetail extends Component {
 
 	renderComments() {
 		if (this.props.dish != null) {
-			const comments = this.props.dish.comments.map((comment) => {
+			const comments= this.props.dish.comments.map((comment) => {
 				var d = new Date(comment.date);
 				console.log(d);
 				return (
-					<ListGroupItem key={comment.id}>
-						<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
-						<ListGroupItemText>
-							--{comment.author} , {d.toUTCString()}
-						</ListGroupItemText>
-					</ListGroupItem>
+					<div className= "mt-2" key={comment.id}>
+						<ListGroupItem >
+							<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
+							<ListGroupItemText>
+								--{comment.author} , {d.toUTCString()}
+							</ListGroupItemText>
+						</ListGroupItem>
+					</div>
+
 				)
 			});
-		}else{
+			return(
+				<div className="m-1 col-12 col-md-5">
+					<h4> Comments </h4>
+					{comments}
+				</div>
+			);
+		} else {
 			return null;
 		}
 	}
 
 
 
-		render() {
-			return (
-				<div className="row mt-5">
-					{this.renderDish()}
-					<div className="m-1 col-12 col-md-5">
-						<h4>Comments</h4>
-						{this.renderComments()}
-					</div>
-				</div>
+	render() {
+		return (
+			<div className="row mt-5">
+				{this.renderDish()}
+				{this.renderComments()}
+			</div>
 
-			);
-		}	
+		);
+	}
 }
 
 export default DishDetail;

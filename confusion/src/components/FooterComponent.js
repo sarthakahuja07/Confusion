@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom'
 class Footer extends Component {
     constructor(props) {
         super(props);
@@ -13,10 +13,18 @@ class Footer extends Component {
                         <div className="col-4 col-sm-4">
                             <h5>Links</h5>
                             <ul className="list-unstyled">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Menu</a></li>
-                                <li><a href="contactus.html">Contact</a></li>
+                                <li>
+                                 <Link to="/home" >Home </Link> 
+                                 </li>
+                                 <li>
+                                 <Link to="/about" >About </Link>
+                                 </li>
+                                 <li>
+                                 <Link to="/menu" >Menu </Link>
+                                 </li>
+                                 <li>
+                                 <Link to="/contact" >contact </Link>
+                                 </li>
                             </ul>
                         </div>
                         <div className="col-7 col-sm-4">
@@ -32,7 +40,7 @@ class Footer extends Component {
                             </address>
                         </div>
                         <div className="col-12 col-sm-4 align-self-center">
-                            <div className="text-right icons">
+                            <div className="text-center icons">
                                 <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
                                 <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
                                 <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>

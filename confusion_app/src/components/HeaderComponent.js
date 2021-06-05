@@ -1,15 +1,55 @@
-import React from 'react'
-import { Navbar, NavbarBrand } from "reactstrap";
+import React ,{useState} from 'react'
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText
+} from "reactstrap";
 import { Jumbotron, Container } from 'reactstrap';
+import { NavLink, Link } from 'react-router-dom';
 
 
-function Header(props){
-   
+
+function Header(props) {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggle(){
+      setIsOpen(!isOpen);
+    }
+
+    function resetToggle(){
+        setIsOpen(false);
+    }
     function renderNavbar() {
         return (
-            <Navbar>
+            <Navbar light expand="md">
                 <div className="container">
-                    <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+                    <NavbarBrand > <Link to="/home"><img src="assets/images/logo.png" width="41px" height="30px" alt='Ristorante Con Fusion' ></img> </Link> </NavbarBrand>
+                    <NavbarToggler onClick={() => toggle()} />
+                    <Collapse isOpen={isOpen} navbar>
+                        <Nav className="ms-auto" navbar>
+                            <NavItem>
+                                <NavLink className="nav-link" onClick={()=>resetToggle()} to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" onClick={()=>resetToggle()} to='/about'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" onClick={()=>resetToggle()} to='/menu'><span className="fa fa-list fa-lg"></span> Menu</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" onClick={()=>resetToggle()} to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
                 </div>
             </Navbar>
         );
@@ -29,14 +69,14 @@ function Header(props){
         );
     }
 
-    
-        return (
-            <React.Fragment>
-                {renderNavbar()}
-                {renderJumbotron()}
-            </React.Fragment>
-        );
-    
+
+    return (
+        <React.Fragment>
+            {renderNavbar()}
+            {renderJumbotron()}
+        </React.Fragment>
+    );
+
 
 }
 

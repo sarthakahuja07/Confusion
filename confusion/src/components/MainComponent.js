@@ -5,8 +5,10 @@ import DishDetail from './DishDetailComponent'
 import Home from './HomeComponent'
 import Contact from './ContactComponent';
 import Header from './HeaderComponent'
+import About from './AboutComponent'
+
 import Footer from './FooterComponent'
-import {Switch,Route,Redirect} from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { DISHES } from '../shared/dishes';
 
@@ -30,38 +32,46 @@ class Main extends Component {
     // <Menu dishes={this.state.dishes} onClick={(dishId) => this.selectDish(dishId)} />
     // <DishDetail dish={this.state.dishes.filter(dish => dish.id === this.state.selectedItem)[0]} />
 
-    HomePage(){
+    HomePage() {
         return (
-            <Home  dish={this.state.dishes.filter((dish) => dish.featured)[0]}
-            promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
-            leader={this.state.leaders.filter((leader) => leader.featured)[0]} 
+            <Home dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+                promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+                leader={this.state.leaders.filter((leader) => leader.featured)[0]}
             />
         );
     }
-    MenuPage(){
+    MenuPage() {
         return (
-            <Menu dishes = {this.state.dishes}/>
+            <Menu dishes={this.state.dishes} />
         );
     }
 
-    DishDetailPage = ({match}) => {
-        return(
-            <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
-              comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+    DishDetailPage = ({ match }) => {
+        return (
+            <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+                comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
         );
-      };
+    };
+
+    AboutPage() {
+        return (
+            <About leaders={this.state.leaders} />
+
+        );
+    }
+
     render() {
         return (
             <React.Fragment>
                 <Header />
-                    <Switch>
-                        <Route path="/home" component={()=>this.HomePage()} ></Route>
-                        <Route exact path="/menu" component={()=>this.MenuPage()} ></Route>
-                        <Route exact path="/contactus" component={()=><Contact />} ></Route>
-                        <Route path='/menu/:dishId' component={this.DishDetailPage}></Route>
-
-                        <Redirect to = '/home'> </Redirect>
-                    </Switch>
+                <Switch>
+                    <Route path="/home" component={() => this.HomePage()} ></Route>
+                    <Route exact path="/menu" component={() => this.MenuPage()} ></Route>
+                    <Route exact path="/contactus" component={() => <Contact />} ></Route>
+                    <Route path='/menu/:dishId' component={this.DishDetailPage}></Route>
+                    <Route path='/aboutus' component={() => this.AboutPage()}></Route>
+                    <Redirect to='/home'> </Redirect>
+                </Switch>
                 <Footer />
             </React.Fragment>
         );

@@ -7,6 +7,8 @@ import Header from './HeaderComponent'
 import Contact from './ContactComponent';
 import Home from './HomeComponent'
 import Footer from './FooterComponent'
+import About from './AboutComponent'
+
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { DISHES } from '../shared/dishes';
 
@@ -42,7 +44,12 @@ function Main() {
 				comments={comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
 		);
 	};
+	function AboutPage() {
+        return (
+            <About leaders={leaders} />
 
+        );
+    }
 	return (
 		<div >
 			<React.Fragment>
@@ -52,7 +59,7 @@ function Main() {
 					<Route exact path="/menu" component={() => MenuPage()} ></Route>
 					<Route exact path="/contactus" component={() => <Contact />} ></Route>
 					<Route path='/menu/:dishId' component={DishDetailPage}></Route>
-
+                    <Route path='/aboutus' component={() => AboutPage()}></Route>
 					<Redirect to='/home'> </Redirect>
 				</Switch>
 				<Footer />

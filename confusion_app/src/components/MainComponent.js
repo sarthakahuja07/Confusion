@@ -18,7 +18,7 @@ function Main() {
 
 	const [dishes, setdishes] = useState(DISHES);
 	const [comments, setcomments] = useState(COMMENTS);
-	const [promotions, setpromotions] = useState(DISHES);
+	const [promotions, setpromotions] = useState(PROMOTIONS);
 
 	const [leaders, setleaders] = useState(LEADERS);
 

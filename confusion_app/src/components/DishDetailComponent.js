@@ -1,10 +1,11 @@
 import React from "react";
-
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function DishDetail(props) {
 	var comments;
 	if(props.dish != null){
-		 comments = props.dish.comments.map((comment) => {
+		 comments = props.comments.map((comment) => {
 			var d = new Date(comment.date);
 			console.log(d);
 			return (
@@ -46,6 +47,16 @@ function DishDetail(props) {
 		return (
 
 			<div className="container">
+				<div className="row mt-5">
+				<Breadcrumb>
+					<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+					<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+				</Breadcrumb>
+				<div className="col-12">
+					<h3>{props.dish.name}</h3>
+					<hr />
+				</div>
+			</div>
 				<div className="mt-5 row">
 
 					{renderDish()}

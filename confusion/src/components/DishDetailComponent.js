@@ -4,9 +4,10 @@ import {
 	CardTitle, CardSubtitle, CardImg
 } from 'reactstrap';
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
-
-function DishDetail(props){
+function DishDetail(props) {
 
 
 	function renderDish() {
@@ -26,7 +27,7 @@ function DishDetail(props){
 					</Card>
 				</div>
 			);
-		}else {
+		} else {
 			return null;
 		}
 
@@ -34,7 +35,7 @@ function DishDetail(props){
 
 	function renderComments() {
 		if (props.dish != null) {
-			const comments = props.dish.comments.map((comment) => {
+			const comments = props.comments.map((comment) => {
 				var d = new Date(comment.date);
 				console.log(d);
 				return (
@@ -59,16 +60,27 @@ function DishDetail(props){
 			return null;
 		}
 	}
-		return (
+	return (
 		<div className="container">
 			<div className="row mt-5">
+				<Breadcrumb>
+					<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+					<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+				</Breadcrumb>
+				<div className="col-12">
+					<h3>{props.dish.name}</h3>
+					<hr />
+				</div>
+			</div>
+			<div className="row mt-5">
+
 				{renderDish()}
 				{renderComments()}
 			</div>
 		</div>
 	);
 
-	
+
 }
 
 export default DishDetail;

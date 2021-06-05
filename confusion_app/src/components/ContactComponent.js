@@ -1,8 +1,20 @@
 import React from 'react';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function Contact(props) {
     return (
         <div className="container">
+            <div className="row mt-5">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>Contact Us</h3>
+                    <hr />
+                </div>                
+            </div>
             <div className="row row-content">
                 <div className="col-12">
                     <h3>Location Information</h3>
@@ -21,8 +33,8 @@ function Contact(props) {
                 </div>
                 <div className="col-12 col-sm-6 offset-sm-1">
                     <h5>Map of our Location</h5>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.8400800729014!2d77.0215414502638!3d28.454236782402553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d183a93523829%3A0x6ba91f885f42cc25!2s4%2F75%2C%20Gali%20Number%204%2C%20Shivaji%20Nagar%2C%20Sector%2011%2C%20Gurugram%2C%20Haryana%20122001!5e0!3m2!1sen!2sin!4v1622890497774!5m2!1sen!2sin" width="400" height="300"  allowfullscreen="" loading="lazy"></iframe>
-
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.8400800729014!2d77.0215414502638!3d28.454236782402553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d183a93523829%3A0x6ba91f885f42cc25!2s4%2F75%2C%20Gali%20Number%204%2C%20Shivaji%20Nagar%2C%20Sector%2011%2C%20Gurugram%2C%20Haryana%20122001!5e0!3m2!1sen!2sin!4v1622890497774!5m2!1sen!2sin" width="400" height="300" style={{border:0}} allowfullscreen="" loading="lazy"></iframe>
+                    
                 </div>
                 <div className="col-12 col-sm-11 offset-sm-1">
                     <div className="btn-group" role="group">

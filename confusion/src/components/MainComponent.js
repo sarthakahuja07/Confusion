@@ -15,6 +15,7 @@ import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
 
 
+
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -43,7 +44,12 @@ class Main extends Component {
         );
     }
 
-
+    DishDetailPage = ({match}) => {
+        return(
+            <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+              comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+        );
+      };
     render() {
         return (
             <React.Fragment>
@@ -52,6 +58,8 @@ class Main extends Component {
                         <Route path="/home" component={()=>this.HomePage()} ></Route>
                         <Route exact path="/menu" component={()=>this.MenuPage()} ></Route>
                         <Route exact path="/contactus" component={()=><Contact />} ></Route>
+                        <Route path='/menu/:dishId' component={this.DishDetailPage}></Route>
+
                         <Redirect to = '/home'> </Redirect>
                     </Switch>
                 <Footer />

@@ -7,7 +7,7 @@ import Header from './HeaderComponent'
 import Contact from './ContactComponent';
 import Home from './HomeComponent'
 import Footer from './FooterComponent'
-import {Switch,Route,Redirect} from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { DISHES } from '../shared/dishes';
 
 import { COMMENTS } from '../shared/comments';
@@ -23,19 +23,25 @@ function Main() {
 	const [leaders, setleaders] = useState(LEADERS);
 
 
-	function HomePage(){
+	function HomePage() {
 		return (
-            <Home  dish={dishes.filter((dish) => dish.featured)[0]}
-            promotion={promotions.filter((promo) => promo.featured)[0]}
-            leader={leaders.filter((leader) => leader.featured)[0]} 
-            />
-        );
-    }
-     function MenuPage(){
-        return (
-            <Menu dishes = {dishes}/>
-        );
-    }
+			<Home dish={dishes.filter((dish) => dish.featured)[0]}
+				promotion={promotions.filter((promo) => promo.featured)[0]}
+				leader={leaders.filter((leader) => leader.featured)[0]}
+			/>
+		);
+	}
+	function MenuPage() {
+		return (
+			<Menu dishes={dishes} />
+		);
+	}
+	function DishDetailPage({ match }){
+		return (
+			<DishDetail dish={dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+				comments={comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
+		);
+	};
 
 	return (
 		<div >
@@ -44,7 +50,9 @@ function Main() {
 				<Switch>
 					<Route path="/home" component={() => HomePage()} ></Route>
 					<Route exact path="/menu" component={() => MenuPage()} ></Route>
-					<Route exact path="/contactus" component={()=><Contact />} ></Route>
+					<Route exact path="/contactus" component={() => <Contact />} ></Route>
+					<Route path='/menu/:dishId' component={DishDetailPage}></Route>
+
 					<Redirect to='/home'> </Redirect>
 				</Switch>
 				<Footer />

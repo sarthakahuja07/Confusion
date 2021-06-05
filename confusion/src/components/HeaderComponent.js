@@ -44,7 +44,7 @@ class Header extends Component {
                                 <NavLink className="nav-link" onClick={()=>this.resetToggle()} to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" onClick={()=>this.resetToggle()} to='/about'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                                <NavLink className="nav-link" onClick={()=>this.resetToggle()} to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink className="nav-link" onClick={()=>this.resetToggle()} to='/menu'><span className="fa fa-list fa-lg"></span> Menu</NavLink>

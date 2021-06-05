@@ -3,18 +3,32 @@ import React, { useState } from "react";
 import Menu from "./MenuComponents";
 import DishDetail from './DishDetailComponent'
 import Dishes from '../shared/dishes';
-import Home from './HomeComponent'
 import Header from './HeaderComponent'
+import Contact from './ContactComponent';
+import Home from './HomeComponent'
 import Footer from './FooterComponent'
 import {Switch,Route,Redirect} from 'react-router-dom'
+import { DISHES } from '../shared/dishes';
+
+import { COMMENTS } from '../shared/comments';
+import { PROMOTIONS } from '../shared/promotions';
+import { LEADERS } from '../shared/leaders';
 
 function Main() {
 
-	const [dishes, setdishes] = useState(Dishes);
+	const [dishes, setdishes] = useState(DISHES);
+	const [comments, setcomments] = useState(COMMENTS);
+	const [promotions, setpromotions] = useState(DISHES);
+
+	const [leaders, setleaders] = useState(LEADERS);
+
 
 	function HomePage(){
-        return (
-            <Home />
+		return (
+            <Home  dish={dishes.filter((dish) => dish.featured)[0]}
+            promotion={promotions.filter((promo) => promo.featured)[0]}
+            leader={leaders.filter((leader) => leader.featured)[0]} 
+            />
         );
     }
      function MenuPage(){
@@ -30,6 +44,7 @@ function Main() {
 				<Switch>
 					<Route path="/home" component={() => HomePage()} ></Route>
 					<Route exact path="/menu" component={() => MenuPage()} ></Route>
+					<Route exact path="/contactus" component={()=><Contact />} ></Route>
 					<Redirect to='/home'> </Redirect>
 				</Switch>
 				<Footer />

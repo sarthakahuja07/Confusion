@@ -60,7 +60,7 @@ class Header extends Component {
     }
     renderJumbotron() {
         return (
-            <Jumbotron fluid>
+            <Jumbotron fluid className="mb-5">
                 <div className="container">
                     <div className="row row-header">
                         <div className="col-12 col-sm-6">

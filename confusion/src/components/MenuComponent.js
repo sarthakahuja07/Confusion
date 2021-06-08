@@ -26,7 +26,7 @@ function Menu(props){
 		return (
 			<div className="container">
 				<div className="row">
-				<Breadcrumb className="mt-5">
+				<Breadcrumb className="">
                         <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Menu</BreadcrumbItem>
                     </Breadcrumb>

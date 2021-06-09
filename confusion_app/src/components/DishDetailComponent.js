@@ -1,6 +1,7 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentFormComponent'
 
 function DishDetail(props) {
 	var comments;
@@ -39,6 +40,8 @@ function DishDetail(props) {
 			<div className="m-1 col-12 col-md-5">
 				<h4>Comments</h4>
 				{comments}
+				<CommentForm />
+
 			</div>
 		);
 	}

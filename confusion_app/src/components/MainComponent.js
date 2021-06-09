@@ -2,51 +2,50 @@
 import React, { useState } from "react";
 import Menu from "./MenuComponents";
 import DishDetail from './DishDetailComponent'
-import Dishes from '../shared/dishes';
 import Header from './HeaderComponent'
 import Contact from './ContactComponent';
 import Home from './HomeComponent'
 import Footer from './FooterComponent'
 import About from './AboutComponent'
 
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { DISHES } from '../shared/dishes';
+import { Switch, Route, Redirect, withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import { COMMENTS } from '../shared/comments';
-import { PROMOTIONS } from '../shared/promotions';
-import { LEADERS } from '../shared/leaders';
+const mapStateToProps=(state)=>{
+	return {
+		dishes:state.dishes,
+		comments:state.comments,
+		promotions:state.promotions,
+		leaders:state.leaders
+	};
+}
 
-function Main() {
+function Main(props) {
 
-	const [dishes, setdishes] = useState(DISHES);
-	const [comments, setcomments] = useState(COMMENTS);
-	const [promotions, setpromotions] = useState(PROMOTIONS);
+	
 
-	const [leaders, setleaders] = useState(LEADERS);
-
-
-	function HomePage() {
+	function HomePage(){
 		return (
-			<Home dish={dishes.filter((dish) => dish.featured)[0]}
-				promotion={promotions.filter((promo) => promo.featured)[0]}
-				leader={leaders.filter((leader) => leader.featured)[0]}
+			<Home dish={props.dishes.filter((dish) => dish.featured)[0]}
+				promotion={props.promotions.filter((promo) => promo.featured)[0]}
+				leader={props.leaders.filter((leader) => leader.featured)[0]}
 			/>
 		);
 	}
 	function MenuPage() {
 		return (
-			<Menu dishes={dishes} />
+			<Menu dishes={props.dishes} />
 		);
 	}
 	function DishDetailPage({ match }){
 		return (
-			<DishDetail dish={dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
-				comments={comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
+			<DishDetail dish={props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+				comments={props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
 		);
 	};
 	function AboutPage() {
         return (
-            <About leaders={leaders} />
+            <About leaders={props.leaders} />
 
         );
     }
@@ -68,4 +67,4 @@ function Main() {
 	);
 }
 
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));

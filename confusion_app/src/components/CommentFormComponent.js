@@ -46,8 +46,8 @@ const CommentForm = (props) => {
                 <ModalBody>
                     <form onSubmit={formik.handleSubmit}>
                         <FormGroup row>
-                            <Label htmlfor="rating" sm={2}>Rating</Label>
-                            <Col sm={10}>
+                            <Label htmlfor="rating" sm={12}>Rating</Label>
+                            <Col sm={12}>
                                 <Input id="rating"
                                     name="rating"
                                     type="select"
@@ -62,8 +62,8 @@ const CommentForm = (props) => {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label htmlfor="name" sm={2}>Name</Label>
-                            <Col sm={10}>
+                            <Label htmlfor="name" sm={12}>Name</Label>
+                            <Col sm={12}>
                                 <Input id="name"
                                     name="name"
                                     type="text"
@@ -74,8 +74,8 @@ const CommentForm = (props) => {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label htmlfor="comment" sm={2}>Comment</Label>
-                            <Col sm={10}>
+                            <Label htmlfor="comment" sm={12}>Comment</Label>
+                            <Col sm={12}>
                                 <Input id="comment"
                                     name="comment"
                                     type="textarea"

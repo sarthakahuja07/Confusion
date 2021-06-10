@@ -68,7 +68,7 @@ function Header(props) {
                             <NavItem>
                                 <NavLink className="nav-link" onClick={() => resetToggle()} to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
                             </NavItem>
-                            <NavItem className="ml-3">
+                            <NavItem className="ml-md-3">
                                 <Button
                                     outline
                                     color="success"

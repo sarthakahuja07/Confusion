@@ -5,8 +5,8 @@ import CommentForm from './CommentFormComponent'
 
 function DishDetail(props) {
 	var comments;
-	if(props.dish != null){
-		 comments = props.comments.map((comment) => {
+	if (props.dish != null) {
+		comments = props.comments.map((comment) => {
 			var d = new Date(comment.date);
 			console.log(d);
 			return (
@@ -40,8 +40,8 @@ function DishDetail(props) {
 			<div className="m-1 col-12 col-md-5">
 				<h4>Comments</h4>
 				{comments}
-				<CommentForm />
-
+				<CommentForm dishId={props.dish.id}
+					addComment={props.addComment} />
 			</div>
 		);
 	}
@@ -51,15 +51,15 @@ function DishDetail(props) {
 
 			<div className="container">
 				<div className="row mt-5">
-				<Breadcrumb>
-					<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-					<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-				</Breadcrumb>
-				<div className="col-12">
-					<h3>{props.dish.name}</h3>
-					<hr />
+					<Breadcrumb>
+						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+					</Breadcrumb>
+					<div className="col-12">
+						<h3>{props.dish.name}</h3>
+						<hr />
+					</div>
 				</div>
-			</div>
 				<div className="mt-5 row">
 
 					{renderDish()}

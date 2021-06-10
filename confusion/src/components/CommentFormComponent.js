@@ -33,8 +33,8 @@ const CommentForm = (props) => {
         },
         validate,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
             toggleModal()
+            props.addComment(props.dishId,values.rating,values.comment,values.name);
         },
     });
     return (
@@ -46,7 +46,7 @@ const CommentForm = (props) => {
                 <ModalBody>
                     <form onSubmit={formik.handleSubmit}>
                         <FormGroup row>
-                            <Label htmlfor="rating" sm={12}>Rating</Label>
+                            <Label htmlFor="rating" sm={12}>Rating</Label>
                             <Col sm={12}>
                                 <Input id="rating"
                                     name="rating"
@@ -62,7 +62,7 @@ const CommentForm = (props) => {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label htmlfor="name" sm={12}>Name</Label>
+                            <Label htmlFor="name" sm={12}>Name</Label>
                             <Col sm={12}>
                                 <Input id="name"
                                     name="name"
@@ -74,7 +74,7 @@ const CommentForm = (props) => {
                             </Col>
                         </FormGroup>
                         <FormGroup row>
-                            <Label htmlfor="comment" sm={12}>Comment</Label>
+                            <Label htmlFor="comment" sm={12}>Comment</Label>
                             <Col sm={12}>
                                 <Input id="comment"
                                     name="comment"
@@ -85,7 +85,7 @@ const CommentForm = (props) => {
                                 </Input>
                             </Col>
                         </FormGroup>
-                        <Col sm={{ size: 10, offset: 2 }}>
+                        <Col sm={{ size: 10 }}>
                         <button type="submit" className=" btn btn-warning ">Submit</button>
                         </Col>
                     </form>

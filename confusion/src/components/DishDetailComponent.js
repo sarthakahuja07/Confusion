@@ -56,7 +56,8 @@ function DishDetail(props) {
 				<div className="m-1 col-12 col-md-5">
 					<h4> Comments </h4>
 					{comments}
-					<CommentForm />
+					<CommentForm dishId={props.dish.id} 
+					addComment= {props.addComment}/>
 				</div>
 			);
 		} else {

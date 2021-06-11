@@ -4,6 +4,7 @@ import {
 	Card, CardText, CardBody, CardLink,
 	CardTitle, CardSubtitle, CardImg, Breadcrumb, BreadcrumbItem 
 } from 'reactstrap';
+import LoadingComponent from './LoadingComponent'
 
 
 function Menu(props){
@@ -23,8 +24,9 @@ function Menu(props){
 			);
 		});
 
-		return (
-			<div className="container">
+		if(props.isLoading){
+			return(
+				<div className="container">
 				<div className="row">
 				<Breadcrumb className="">
                         <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
@@ -34,10 +36,47 @@ function Menu(props){
                         <h3>Menu</h3>
                         <hr />
                     </div>   
-					{menu}
+					<LoadingComponent/>
 				</div>
 			</div>
-		);
+			)
+		}else if(props.err!=null){
+			return(
+				<div className="container">
+				<div className="row">
+				<Breadcrumb className="">
+                        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>Menu</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>Menu</h3>
+                        <hr />
+                    </div>   
+					<h4>{props.err}</h4>
+				</div>
+			</div>
+			)
+		}else{
+			return (
+				
+				<div className="container">
+					<div className="row">
+					<Breadcrumb className="">
+							<BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+							<BreadcrumbItem active>Menu</BreadcrumbItem>
+						</Breadcrumb>
+						<div className="col-12">
+							<h3>Menu</h3>
+							<hr />
+						</div>   
+						{menu}
+					</div>
+				</div>
+			
+			);
+			
+		}
+
 	
 }
 

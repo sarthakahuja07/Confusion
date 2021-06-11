@@ -2,6 +2,7 @@ import React from "react";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent'
+import LoadingComponent from './LoadingComponent'
 
 function DishDetail(props) {
 	var comments;
@@ -46,7 +47,29 @@ function DishDetail(props) {
 		);
 	}
 
-	if (props.dish != null) {
+	if (props.isLoading) {
+		return (
+			<div className="container">
+				<div className="row mt-5">
+					<Breadcrumb>
+						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+						<BreadcrumbItem active></BreadcrumbItem>
+					</Breadcrumb>
+					<div className="col-12">
+						<hr />
+					</div>
+				</div>
+				<div className="mt-5 row">
+					<LoadingComponent></LoadingComponent>
+				</div>
+			</div>
+		);
+
+	}else if(props.err!=null){
+		return (
+			<h4>{props.err}</h4>
+		)
+	} else {
 		return (
 
 			<div className="container">
@@ -67,8 +90,6 @@ function DishDetail(props) {
 				</div>
 			</div>
 		);
-	} else {
-		return null;
 	}
 }
 export default DishDetail;

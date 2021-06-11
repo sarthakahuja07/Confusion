@@ -7,7 +7,7 @@ import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } fro
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent'
-
+import LoadingComponent from './LoadingComponent'
 
 function DishDetail(props) {
 
@@ -56,32 +56,59 @@ function DishDetail(props) {
 				<div className="m-1 col-12 col-md-5">
 					<h4> Comments </h4>
 					{comments}
-					<CommentForm dishId={props.dish.id} 
-					addComment= {props.addComment}/>
+					<CommentForm dishId={props.dish.id}
+						addComment={props.addComment} />
 				</div>
 			);
 		} else {
 			return null;
 		}
 	}
-	return (
-		<div className="container">
-			<div className="row mt-5">
-				<Breadcrumb>
-					<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-					<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
-				</Breadcrumb>
-				<div className="col-12">
-					<h3>{props.dish.name}</h3>
-					<hr />
+
+	if (props.isLoading) {
+		return (
+			<div className="container">
+				<div className="row mt-5">
+					<Breadcrumb>
+						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+						<BreadcrumbItem active></BreadcrumbItem>
+
+					</Breadcrumb>
+					<div className="col-12">
+						<hr />
+					</div>
+				</div>
+				<div className="row mt-5">
+					<LoadingComponent></LoadingComponent>
 				</div>
 			</div>
-			<div className="row mt-5">
-				{renderDish()}
-				{renderComments()}
+		)
+
+
+	} else if (props.err != null) {
+		return (
+			<h4>{props.err}</h4>
+		)
+	} else {
+		return (
+			<div className="container">
+				<div className="row mt-5">
+					<Breadcrumb>
+						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+					</Breadcrumb>
+					<div className="col-12">
+						<h3>{props.dish.name}</h3>
+						<hr />
+					</div>
+				</div>
+				<div className="row mt-5">
+					{renderDish()}
+					{renderComments()}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 
 
 }

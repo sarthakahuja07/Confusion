@@ -21,15 +21,14 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
-		addComment: (dishId, rating, comment, author) => {
-			dispatch(addComment(dishId, rating, comment, author))
-		},
-		fetchDishes: () => {
-			console.log("hi");
-			dispatch(fetchDishes());
-		},
-		fetchComments: () => {
+    return {
+        addComment: (dishId, rating, comment, author) => {
+            dispatch(addComment(dishId, rating, comment, author))
+        },
+        fetchDishes: () => {
+            dispatch(fetchDishes());
+        },
+        fetchComments: () => {
             dispatch(fetchComments());
         },
         fetchPromotions: () => {
@@ -38,18 +37,19 @@ function mapDispatchToProps(dispatch) {
         fetchLeaders: () => {
             dispatch(fetchLeaders());
         },
-	};
 
+    };
 }
 
 function Main(props) {
 
+
 	useEffect(() => {
 		props.fetchDishes();
 		props.fetchComments();
-        props.fetchLeaders();
-        props.fetchPromotions();
-	});
+		props.fetchLeaders();
+		props.fetchPromotions();
+	}, []); 
 
 	function HomePage() {
 		return (

@@ -40,7 +40,8 @@ export const CommentsReducer=(state={
                 var comment=action.payload;
                 comment.id=state.length;
                 comment.date=new Date().toISOString();
-                return {...state, comments : state.comments.concat(comment)}
+				console.log("============================");
+				return { ...state, comments: state.comments.concat(comment)};				
             }
 
         default:

@@ -9,7 +9,7 @@ import axios from 'axios';
 
 export const addComment = (dishId, rating, comment, author) => {
 	return {
-		type: ActionTypes.Add_Comments,
+		type: ActionTypes.Add_Comment,
 		payload: {
 			dishId: dishId,
 			rating: rating,

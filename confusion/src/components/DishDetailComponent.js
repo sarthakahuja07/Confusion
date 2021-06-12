@@ -74,7 +74,7 @@ function DishDetail(props) {
 				)
 			});
 			return (
-				<div className="m-1 col-12 col-md-6">
+				<div className="col-12 col-md-6">
 					<h4> Comments </h4>
 					{comments}
 					<CommentForm dishId={props.dish.id}

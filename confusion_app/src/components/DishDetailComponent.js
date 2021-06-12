@@ -1,51 +1,91 @@
 import React from "react";
+import {
+	Card, CardText, CardBody, CardLink,
+	CardTitle, CardSubtitle, CardImg
+} from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent'
 import LoadingComponent from './LoadingComponent'
+import baseUrl from '../shared/baseUrl'
 
 function DishDetail(props) {
-	var comments;
-	if (props.dish != null) {
-		comments = props.comments.map((comment) => {
-			var d = new Date(comment.date);
-			console.log(d);
-			return (
-				<div className="list-group-item" key={comment.id}>
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">{comment.comment}</h5>
-					</div>
-					<p class="mb-1">--{comment.author} , {d.toUTCString()}</p>
-				</div>
-			)
-		});
-	}
-
 
 	function renderDish() {
-		return (
-			<div className="col-12 col-md-5 ">
-				<div className="card p-2 text-black bg-primary">
-					<img src={props.dish.image} alt={props.dish.name} className="card-img-top"></img>
-					<div className="text-white card-body">
-						<h5 className="card-title">{props.dish.name}</h5>
-						<p className="card-text">{props.dish.description}</p>
-					</div>
-				</div>
-			</div>
-		);
-	}
 
-	function renderComment() {
-		return (
-			<div className="m-1 col-12 col-md-5">
-				<h4>Comments</h4>
-				{comments}
-				<CommentForm dishId={props.dish.id}
-					addComment={props.addComment} />
-			</div>
-		);
+		if(props.isDishLoading){
+			return(
+				<div>
+					<LoadingComponent></LoadingComponent>
+				</div>
+			);
+		}else if(props.dishErr!=null){
+			return(
+				<div>
+					<h4>{props.dishErr}</h4>
+				</div>
+			);
+		}else{
+			return (
+					<div className="col-12 col-md-6 ">
+						<Card body inverse color="danger">
+							<CardImg top width="100%" src={baseUrl + props.dish.image} alt={props.dish.name} />
+							<CardBody>
+								<CardTitle tag="h5">
+									{props.dish.name}
+								</CardTitle>
+								<CardText>
+									{props.dish.description}
+								</CardText>
+							</CardBody>
+						</Card>
+					</div>
+				);
+		}
 	}
+	
+	function renderComments() {
+		if(props.isCommentLoading){
+			return(
+				<div>
+					<LoadingComponent></LoadingComponent>
+				</div>
+			);
+		}else if(props.commentErr!=null){
+			return(
+				<div>
+					<h4>{props.commentErr}</h4>
+				</div>
+			);
+		}else{
+			const comments = props.comments.map((comment) => {
+				var d = new Date(comment.date);
+				console.log(d);
+				return (
+					<div className="mt-2" key={comment.id}>
+						<ListGroupItem >
+							<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
+							<ListGroupItemText>
+								--{comment.author} , {d.toUTCString()}
+							</ListGroupItemText>
+						</ListGroupItem>
+					</div>
+				)
+			});
+			return (
+				<div className="m-1 col-12 col-md-6">
+					<h4> Comments </h4>
+					{comments}
+					<CommentForm dishId={props.dish.id}
+						addComment={props.addComment} />
+				</div>
+			);
+			
+		}
+
+	}
+	
 
 	if (props.isLoading) {
 		return (
@@ -54,43 +94,45 @@ function DishDetail(props) {
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
 						<BreadcrumbItem active></BreadcrumbItem>
+
 					</Breadcrumb>
 					<div className="col-12">
 						<hr />
 					</div>
 				</div>
-				<div className="mt-5 row">
+				<div className="row mt-5">
 					<LoadingComponent></LoadingComponent>
 				</div>
 			</div>
-		);
+		)
 
-	}else if(props.err!=null){
+
+	} else if (props.err != null) {
 		return (
 			<h4>{props.err}</h4>
 		)
 	} else {
 		return (
-
 			<div className="container">
 				<div className="row mt-5">
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish ? props.dish.name : ""  }</BreadcrumbItem>
 					</Breadcrumb>
 					<div className="col-12">
-						<h3>{props.dish.name}</h3>
+						<h3>{props.dish ? props.dish.name : ""  }</h3>
 						<hr />
 					</div>
 				</div>
-				<div className="mt-5 row">
-
+				<div className="row mt-5">
 					{renderDish()}
-					{renderComment()}
+					{renderComments()}
 				</div>
 			</div>
 		);
 	}
-}
-export default DishDetail;
 
+
+}
+
+export default DishDetail;

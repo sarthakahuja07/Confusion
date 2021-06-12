@@ -18,7 +18,6 @@ export const DishesReducer = (state = {
 			}
 		case ActionTypes.Add_Dishes:
 			{
-				console.log(action.payload.dishes);
 				return {
 					isLoading: false,
 					err: null,

@@ -8,7 +8,7 @@ import About from './AboutComponent'
 import Footer from './FooterComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addComment ,fetchDishes} from '../redux/actionCreator'
+import { addComment, fetchDishes, fetchComments, fetchLeaders, fetchPromotions } from '../redux/actionCreator'
 
 function mapStateToProps(state) {
     return {
@@ -22,50 +22,62 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addComment : (dishId, rating, comment, author) => {
+        addComment: (dishId, rating, comment, author) => {
             dispatch(addComment(dishId, rating, comment, author))
         },
-        fetchDishes : () => {
-            console.log("hi");
+        fetchDishes: () => {
             dispatch(fetchDishes());
+        },
+        fetchComments: () => {
+            dispatch(fetchComments());
+        },
+        fetchPromotions: () => {
+            dispatch(fetchPromotions());
+        },
+        fetchLeaders: () => {
+            dispatch(fetchLeaders());
         },
 
     };
 }
-
-
-
 
 class Main extends Component {
 
     constructor(props) {
         super(props);
     }
-    
-    componentDidMount(){
-        console.log("yo");
+
+    componentDidMount() {
         this.props.fetchDishes();
+        this.props.fetchComments();
+        this.props.fetchLeaders();
+        this.props.fetchPromotions();
     }
 
 
     // <Menu dishes={this.props.dishes.dishes} onClick={(dishId) => this.selectDish(dishId)} />
     // <DishDetail dish={this.props.dishes.dishes.filter(dish => dish.id === this.props.selectedItem)[0]} />
-    
+
     HomePage() {
+
         return (
             <Home dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
-                promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
-                leader={this.props.leaders.filter((leader) => leader.featured)[0]}
-                isLoading={this.props.dishes.isLoading}
-                err={this.props.dishes.err}
+                promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
+                leader={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
+                isDishLoading={this.props.dishes.isLoading}
+                dishErr={this.props.dishes.err}
+                isLeaderLoading={this.props.leaders.isLoading}
+                leaderErr={this.props.leaders.err}
+                isPromotionLoading={this.props.promotions.isLoading}
+                promotionErr={this.props.promotions.err}
             />
         );
     }
     MenuPage() {
         return (
-            <Menu dishes={this.props.dishes.dishes} 
-                isLoading={this.props.dishes.isLoading}
-                err={this.props.dishes.err}
+            <Menu dishes={this.props.dishes.dishes}
+                isDishLoading={this.props.dishes.isLoading}
+                dishErr={this.props.dishes.err}
             />
         );
     }
@@ -73,18 +85,21 @@ class Main extends Component {
     DishDetailPage = ({ match }) => {
         return (
             <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
-                comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+                comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
                 addComment={this.props.addComment}
-                isLoading={this.props.dishes.isLoading}
-                err={this.props.dishes.err}
+                isDishLoading={this.props.dishes.isLoading}
+                dishErr={this.props.dishes.err}
+                isCommentLoading={this.props.comments.isLoading}
+                commmentErr={this.props.comments.err}
             />
-
         );
     };
 
     AboutPage() {
         return (
-            <About leaders={this.props.leaders} />
+            <About leaders={this.props.leaders.leaders}
+                isLeaderLoading={this.props.leaders.isLoading}
+                leaderErr={this.props.leaders.err} />
         );
     }
 

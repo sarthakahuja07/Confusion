@@ -1,6 +1,35 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import baseUrl from '../shared/baseUrl'
+import LoadingComponent from './LoadingComponent'
+
+
+
+function returnLoadingOrLeader(isLeaderLoading, leaders, err) {
+	if (isLeaderLoading) {
+		return (
+			<div className="row mt-5">
+				<LoadingComponent></LoadingComponent>
+			</div>
+		);
+	} else if(err!=null){
+		return (
+			<div className="row mt-5">
+				<h4>err</h4>
+			</div>
+		);
+	}
+		else {
+		const leadersList = leaders.map((leader) => {
+			return (
+				<RenderLeader leader={leader} />
+			);
+		});
+		return leadersList;
+	}
+}
+
 
 function RenderLeader({ leader }) {
     return(
@@ -91,7 +120,7 @@ function About(props) {
                 <div className="col-12">
                     <div className="row">
                         <ul className="list-unstyled">
-                            {leaders}
+						{returnLoadingOrLeader(props.isLeaderLoading, props.leaders, props.leaderErr)}
                         </ul>
                     </div>                    
                 </div>

@@ -5,26 +5,27 @@ import {
 	CardTitle, CardSubtitle, CardImg, Breadcrumb, BreadcrumbItem 
 } from 'reactstrap';
 import LoadingComponent from './LoadingComponent'
+import baseUrl from '../shared/baseUrl'
 
 
 function Menu(props){
 
 		var menu = props.dishes.map((dish) => {
 			return (
-				<div key={dish.id} className="mt-5 col-12 col-md-5">
+				<div key={dish.id} className="mt-5 col-12 col-md-6">
 					<Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
 					<Link to={`/menu/${dish.id}`} >
 						<CardBody>
 							<CardTitle tag="h5">{dish.name}</CardTitle>
 						</CardBody>
-						<img width="100%" src={dish.image} alt={dish.name} />
+						<img width="100%" src={baseUrl+dish.image} alt={dish.name} />
 						</Link>
 					</Card>
 				</div>
 			);
 		});
 
-		if(props.isLoading){
+		if(props.isDishLoading){
 			return(
 				<div className="container">
 				<div className="row">
@@ -40,7 +41,7 @@ function Menu(props){
 				</div>
 			</div>
 			)
-		}else if(props.err!=null){
+		}else if(props.DishErr!=null){
 			return(
 				<div className="container">
 				<div className="row">

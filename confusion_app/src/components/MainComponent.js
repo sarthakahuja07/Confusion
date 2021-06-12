@@ -9,7 +9,7 @@ import Footer from './FooterComponent'
 import About from './AboutComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addComment, fetchDishes } from '../redux/actionCreator'
+import { addComment, fetchDishes, fetchComments, fetchLeaders, fetchPromotions } from '../redux/actionCreator'
 
 const mapStateToProps = (state) => {
 	return {
@@ -28,7 +28,16 @@ function mapDispatchToProps(dispatch) {
 		fetchDishes: () => {
 			console.log("hi");
 			dispatch(fetchDishes());
-		}
+		},
+		fetchComments: () => {
+            dispatch(fetchComments());
+        },
+        fetchPromotions: () => {
+            dispatch(fetchPromotions());
+        },
+        fetchLeaders: () => {
+            dispatch(fetchLeaders());
+        },
 	};
 
 }
@@ -37,40 +46,52 @@ function Main(props) {
 
 	useEffect(() => {
 		props.fetchDishes();
+		props.fetchComments();
+        props.fetchLeaders();
+        props.fetchPromotions();
 	});
 
 	function HomePage() {
 		return (
 			<Home dish={props.dishes.dishes.filter((dish) => dish.featured)[0]}
-				promotion={props.promotions.filter((promo) => promo.featured)[0]}
-				leader={props.leaders.filter((leader) => leader.featured)[0]}
-				isLoading={props.dishes.isLoading}
-				err={props.dishes.err}
-			/>
-		);
+			promotion={props.promotions.promotions.filter((promo) => promo.featured)[0]}
+			leader={props.leaders.leaders.filter((leader) => leader.featured)[0]}
+			isDishLoading={props.dishes.isLoading}
+			dishErr={props.dishes.err}
+			isLeaderLoading={props.leaders.isLoading}
+			leaderErr={props.leaders.err}
+			isPromotionLoading={props.promotions.isLoading}
+			promotionErr={props.promotions.err}
+		/>
+	);
+		
 	}
 	function MenuPage() {
 		return (
 			<Menu dishes={props.dishes.dishes}
-				isLoading={props.dishes.isLoading}
-				err={props.dishes.err} />
+			isDishLoading={props.dishes.isLoading}
+			dishErr={props.dishes.err}
+		/>
 		);
 	}
 	function DishDetailPage({ match }) {
 		return (
 			<DishDetail dish={props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
-				comments={props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
-				addComment={props.addComment}
-				isLoading={props.dishes.isLoading}
-				err={props.dishes.err}
-			/>
+			comments={props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+			addComment={props.addComment}
+			isDishLoading={props.dishes.isLoading}
+			dishErr={props.dishes.err}
+			isCommentLoading={props.comments.isLoading}
+			commmentErr={props.comments.err}
+		/>
 		);
 	};
 	function AboutPage() {
 		return (
-			<About leaders={props.leaders} />
-
-		);
+            <About leaders={props.leaders.leaders}
+                isLeaderLoading={props.leaders.isLoading}
+                leaderErr={props.leaders.err} />
+        );
 	}
 	return (
 		<div >

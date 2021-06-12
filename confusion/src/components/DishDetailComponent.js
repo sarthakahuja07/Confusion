@@ -8,35 +8,57 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent'
 import LoadingComponent from './LoadingComponent'
+import baseUrl from '../shared/baseUrl'
 
 function DishDetail(props) {
 
-
 	function renderDish() {
-		if (props.dish != null) {
-			return (
-				<div className="col-12 col-md-5 ">
-					<Card body inverse color="danger">
-						<CardImg top width="100%" src={props.dish.image} alt={props.dish.name} />
-						<CardBody>
-							<CardTitle tag="h5">
-								{props.dish.name}
-							</CardTitle>
-							<CardText>
-								{props.dish.description}
-							</CardText>
-						</CardBody>
-					</Card>
+
+		if(props.isDishLoading){
+			return(
+				<div>
+					<LoadingComponent></LoadingComponent>
 				</div>
 			);
-		} else {
-			return null;
+		}else if(props.dishErr!=null){
+			return(
+				<div>
+					<h4>{props.dishErr}</h4>
+				</div>
+			);
+		}else{
+			return (
+					<div className="col-12 col-md-6 ">
+						<Card body inverse color="danger">
+							<CardImg top width="100%" src={baseUrl + props.dish.image} alt={props.dish.name} />
+							<CardBody>
+								<CardTitle tag="h5">
+									{props.dish.name}
+								</CardTitle>
+								<CardText>
+									{props.dish.description}
+								</CardText>
+							</CardBody>
+						</Card>
+					</div>
+				);
 		}
-
 	}
-
+	
 	function renderComments() {
-		if (props.dish != null) {
+		if(props.isCommentLoading){
+			return(
+				<div>
+					<LoadingComponent></LoadingComponent>
+				</div>
+			);
+		}else if(props.commentErr!=null){
+			return(
+				<div>
+					<h4>{props.commentErr}</h4>
+				</div>
+			);
+		}else{
 			const comments = props.comments.map((comment) => {
 				var d = new Date(comment.date);
 				console.log(d);
@@ -49,21 +71,21 @@ function DishDetail(props) {
 							</ListGroupItemText>
 						</ListGroupItem>
 					</div>
-
 				)
 			});
 			return (
-				<div className="m-1 col-12 col-md-5">
+				<div className="m-1 col-12 col-md-6">
 					<h4> Comments </h4>
 					{comments}
 					<CommentForm dishId={props.dish.id}
 						addComment={props.addComment} />
 				</div>
 			);
-		} else {
-			return null;
+			
 		}
+
 	}
+	
 
 	if (props.isLoading) {
 		return (
@@ -95,10 +117,10 @@ function DishDetail(props) {
 				<div className="row mt-5">
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish ? props.dish.name : ""  }</BreadcrumbItem>
 					</Breadcrumb>
 					<div className="col-12">
-						<h3>{props.dish.name}</h3>
+						<h3>{props.dish ? props.dish.name : ""  }</h3>
 						<hr />
 					</div>
 				</div>

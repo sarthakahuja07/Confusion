@@ -73,12 +73,15 @@ function DishDetail(props) {
 					</div>
 				)
 			});
+
+			comments.push(	<CommentForm dishId={props.dish.id}
+				addComment={props.addComment} />)
+		
+
 			return (
 				<div className="col-12 col-md-6">
 					<h4> Comments </h4>
 					{comments}
-					<CommentForm dishId={props.dish.id}
-						addComment={props.addComment} />
 				</div>
 			);
 			

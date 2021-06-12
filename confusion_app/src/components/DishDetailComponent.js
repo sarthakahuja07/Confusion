@@ -14,51 +14,51 @@ function DishDetail(props) {
 
 	function renderDish() {
 
-		if(props.isDishLoading){
-			return(
+		if (props.isDishLoading) {
+			return (
 				<div>
 					<LoadingComponent></LoadingComponent>
 				</div>
 			);
-		}else if(props.dishErr!=null){
-			return(
+		} else if (props.dishErr != null) {
+			return (
 				<div>
 					<h4>{props.dishErr}</h4>
 				</div>
 			);
-		}else{
+		} else {
 			return (
-					<div className="col-12 col-md-6 ">
-						<Card body inverse color="danger">
-							<CardImg top width="100%" src={baseUrl + props.dish.image} alt={props.dish.name} />
-							<CardBody>
-								<CardTitle tag="h5">
-									{props.dish.name}
-								</CardTitle>
-								<CardText>
-									{props.dish.description}
-								</CardText>
-							</CardBody>
-						</Card>
-					</div>
-				);
+				<div className="col-12 col-md-6 ">
+					<Card body inverse color="danger">
+						<CardImg top width="100%" src={baseUrl + props.dish.image} alt={props.dish.name} />
+						<CardBody>
+							<CardTitle tag="h5">
+								{props.dish.name}
+							</CardTitle>
+							<CardText>
+								{props.dish.description}
+							</CardText>
+						</CardBody>
+					</Card>
+				</div>
+			);
 		}
 	}
-	
+
 	function renderComments() {
-		if(props.isCommentLoading){
-			return(
+		if (props.isCommentLoading) {
+			return (
 				<div>
 					<LoadingComponent></LoadingComponent>
 				</div>
 			);
-		}else if(props.commentErr!=null){
-			return(
+		} else if (props.commentErr != null) {
+			return (
 				<div>
 					<h4>{props.commentErr}</h4>
 				</div>
 			);
-		}else{
+		} else {
 			const comments = props.comments.map((comment) => {
 				var d = new Date(comment.date);
 				console.log(d);
@@ -73,19 +73,23 @@ function DishDetail(props) {
 					</div>
 				)
 			});
+
+			comments.push(<CommentForm dishId={props.dish.id}
+				addComment={props.addComment} />)
+		
+
 			return (
 				<div className="col-12 col-md-6">
 					<h4> Comments </h4>
 					{comments}
-					<CommentForm dishId={props.dish.id}
-						addComment={props.addComment} />
+
 				</div>
 			);
-			
+
 		}
 
 	}
-	
+
 
 	if (props.isLoading) {
 		return (
@@ -117,10 +121,10 @@ function DishDetail(props) {
 				<div className="row mt-5">
 					<Breadcrumb>
 						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-						<BreadcrumbItem active>{props.dish ? props.dish.name : ""  }</BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish ? props.dish.name : ""}</BreadcrumbItem>
 					</Breadcrumb>
 					<div className="col-12">
-						<h3>{props.dish ? props.dish.name : ""  }</h3>
+						<h3>{props.dish ? props.dish.name : ""}</h3>
 						<hr />
 					</div>
 				</div>

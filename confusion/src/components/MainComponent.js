@@ -92,7 +92,7 @@ class Main extends Component {
                 isDishLoading={this.props.dishes.isLoading}
                 dishErr={this.props.dishes.err}
                 isCommentLoading={this.props.comments.isLoading}
-                commmentErr={this.props.comments.err}
+                commentErr={this.props.comments.err}
             />
         );
     };

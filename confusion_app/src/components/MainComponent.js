@@ -82,7 +82,7 @@ function Main(props) {
 			isDishLoading={props.dishes.isLoading}
 			dishErr={props.dishes.err}
 			isCommentLoading={props.comments.isLoading}
-			commmentErr={props.comments.err}
+			commentErr={props.comments.err}
 		/>
 		);
 	};

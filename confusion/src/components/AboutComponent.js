@@ -16,7 +16,7 @@ function returnLoadingOrLeader(isLeaderLoading, leaders, err) {
 	} else if(err!=null){
 		return (
 			<div className="row mt-5">
-				<h4>err</h4>
+				<h4>{err}</h4>
 			</div>
 		);
 	}

@@ -41,7 +41,7 @@ function Menu(props){
 				</div>
 			</div>
 			)
-		}else if(props.DishErr!=null){
+		}else if(props.dishErr!=null){
 			return(
 				<div className="container">
 				<div className="row">
@@ -53,7 +53,7 @@ function Menu(props){
                         <h3>Menu</h3>
                         <hr />
                     </div>   
-					<h4>{props.err}</h4>
+					<h4>{props.dishErr}</h4>
 				</div>
 			</div>
 			)

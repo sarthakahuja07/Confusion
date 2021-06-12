@@ -16,7 +16,7 @@ function returnLoadingOrLeader(isLeaderLoading, leaders, err) {
 	} else if(err!=null){
 		return (
 			<div className="row mt-5">
-				<h4>err</h4>
+				<h4>{err}</h4>
 			</div>
 		);
 	}
@@ -37,7 +37,7 @@ function RenderLeader({ leader }) {
             <li>
             <div className="mt-5">
                 <div class="d-flex border p-3">
-                    <img src={leader.image} alt={leader.name} height="150px"
+                    <img src={baseUrl+leader.image} alt={leader.name} height="150px"
                         class="flex-shrink-0 me-3 rounded-circle"></img>
                     <div>
                         <h4>{leader.name}</h4>

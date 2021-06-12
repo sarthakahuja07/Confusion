@@ -48,12 +48,19 @@ export const fetchDishes = () => (dispatch) => {
 
 	dispatch(dishesLoading);
 	axios.get(baseUrl + "dishes")
-		.then(res=> {
-			dispatch(addDishes(res.data));	
+		.then(res => {
+			dispatch(addDishes(res.data));
 		})
-
+		.catch(error => {
+			if (error.response){
+				dispatch(dishesFailed(error.response.status + ": " + error.response.statusText))
+			}else if(error.request){
+				dispatch(dishesFailed(error.request.toString()))
+			}else{
+				dispatch(dishesFailed('Error', error.message))
+			}
+		})
 }
-
 
 export const commentsLoading = () => {
 	return {
@@ -85,8 +92,17 @@ export const fetchComments = () => (dispatch) => {
 	dispatch(commentsLoading);
 
 	axios.get(baseUrl + "comments")
-		.then(res=> {
-			dispatch(addComments(res.data));	
+		.then(res => {
+			dispatch(addComments(res.data));
+		})
+		.catch(error => {
+			if (error.response){
+				dispatch(commentsFailed(error.response.status + ": " + error.response.statusText))
+			}else if(error.request){
+				dispatch(commentsFailed(error.request.toString()))
+			}else{
+				dispatch(commentsFailed('Error', error.message))
+			}
 		})
 
 
@@ -105,7 +121,7 @@ export const addPromotions = (promotions) => {
 	return {
 		type: ActionTypes.Add_Promotions,
 		payload: {
-			promotions:promotions
+			promotions: promotions
 		}
 	}
 }
@@ -122,10 +138,19 @@ export const promotionsFailed = (err) => {
 export const fetchPromotions = () => (dispatch) => {
 
 	dispatch(promotionsLoading);
-	
+
 	axios.get(baseUrl + "promotions")
-		.then(res=> {
-			dispatch(addPromotions(res.data));	
+		.then(res => {
+			dispatch(addPromotions(res.data));
+		})
+		.catch(error => {
+			if (error.response){
+				dispatch(promotionsFailed(error.response.status + ": " + error.response.statusText))
+			}else if(error.request){
+				dispatch(promotionsFailed(error.request.toString()))
+			}else{
+				dispatch(promotionsFailed('Error', error.message))
+			}
 		})
 
 
@@ -144,7 +169,7 @@ export const addLeaders = (leaders) => {
 	return {
 		type: ActionTypes.Add_Leaders,
 		payload: {
-			leaders:leaders
+			leaders: leaders
 		}
 	}
 }
@@ -161,11 +186,19 @@ export const leadersFailed = (err) => {
 export const fetchLeaders = () => (dispatch) => {
 
 	dispatch(leadersLoading);
-	
-	axios.get(baseUrl + "leaders")
-		.then(res=> {
-			dispatch(addLeaders(res.data));	
-		})
 
+	axios.get(baseUrl + "leaders")
+		.then(res => {
+			dispatch(addLeaders(res.data));
+		})
+		.catch(error => {
+			if (error.response){
+				dispatch(leadersFailed(error.response.status + ": " + error.response.statusText))
+			}else if(error.request){
+				dispatch(leadersFailed(error.request.toString()))
+			}else{
+				dispatch(promotionsFailed('Error', error.message))
+			}
+		})
 
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import LoadingComponent from './LoadingComponent'
 import baseUrl from '../shared/baseUrl'
 
+import FadeIn from 'react-fade-in';
 
 
 function returnLoadingOrLeader(isLeaderLoading, leaders, err) {
@@ -13,14 +14,14 @@ function returnLoadingOrLeader(isLeaderLoading, leaders, err) {
 				<LoadingComponent></LoadingComponent>
 			</div>
 		);
-	} else if(err!=null){
+	} else if (err != null) {
 		return (
 			<div className="row mt-5">
 				<h4>{err}</h4>
 			</div>
 		);
 	}
-		else {
+	else {
 		const leadersList = leaders.map((leader) => {
 			return (
 				<RenderLeader leader={leader} />
@@ -113,7 +114,10 @@ function About(props) {
 				<div className="col-12">
 					<div className="row">
 						<Media list>
-							{returnLoadingOrLeader(props.isLeaderLoading, props.leaders, props.leaderErr)}
+							<FadeIn>
+
+								{returnLoadingOrLeader(props.isLeaderLoading, props.leaders, props.leaderErr)}
+							</FadeIn>
 						</Media>
 					</div>
 				</div>

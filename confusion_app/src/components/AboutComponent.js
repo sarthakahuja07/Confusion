@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import baseUrl from '../shared/baseUrl'
 import LoadingComponent from './LoadingComponent'
+import FadeIn from 'react-fade-in';
 
 
 
@@ -38,7 +39,7 @@ function RenderLeader({ leader }) {
             <div className="mt-5">
                 <div class="d-flex border p-3">
                     <img src={baseUrl+leader.image} alt={leader.name} height="150px"
-                        class="flex-shrink-0 me-3 rounded-circle"></img>
+                        class="flex-shrink-0 mr-3 rounded-circle"></img>
                     <div>
                         <h4>{leader.name}</h4>
                         <p>{leader.description}</p>
@@ -120,7 +121,9 @@ function About(props) {
                 <div className="col-12">
                     <div className="row">
                         <ul className="list-unstyled">
+                            <FadeIn>
 						{returnLoadingOrLeader(props.isLeaderLoading, props.leaders, props.leaderErr)}
+                            </FadeIn>
                         </ul>
                     </div>                    
                 </div>

@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent'
 import LoadingComponent from './LoadingComponent'
 import baseUrl from '../shared/baseUrl'
+import FadeIn from 'react-fade-in';
 
 function DishDetail(props) {
 
@@ -76,13 +77,15 @@ function DishDetail(props) {
 
 			comments.push(<CommentForm dishId={props.dish.id}
 				addComment={props.addComment} />)
-		
+
 
 			return (
 				<div className="col-12 col-md-6">
 					<h4> Comments </h4>
-					{comments}
+					<FadeIn>
 
+						{comments}
+					</FadeIn>
 				</div>
 			);
 

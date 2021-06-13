@@ -39,7 +39,7 @@ const CommentForm = (props) => {
     });
     return (
         <div className="mt-3 ">
-            <button className="btn btn-primary" onClick={toggleModal} ><i class="fa fa-pencil" aria-hidden="true"></i> Sumbit Comment</button>
+            <button className="btn btn-primary" onClick={toggleModal} ><i className="fa fa-pencil" aria-hidden="true"></i> Sumbit Comment</button>
             <Modal isOpen={isModalOpen} toggle={toggleModal}>
                 <ModalHeader toggle={toggleModal}>Submit Comment</ModalHeader>
 

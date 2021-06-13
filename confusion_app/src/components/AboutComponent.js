@@ -37,9 +37,9 @@ function RenderLeader({ leader }) {
         <div key={leader.id} className="col-12 mt-5">
             <li>
             <div className="mt-5">
-                <div class="d-flex border p-3">
+                <div className="d-flex border p-3">
                     <img src={baseUrl+leader.image} alt={leader.name} height="150px"
-                        class="flex-shrink-0 mr-3 rounded-circle"></img>
+                        className="flex-shrink-0 mr-3 rounded-circle"></img>
                     <div>
                         <h4>{leader.name}</h4>
                         <p>{leader.description}</p>

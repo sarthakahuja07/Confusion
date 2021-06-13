@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { postFeedback } from '../redux/actionCreator';
 
 class Contact extends Component {
     constructor(props) {
@@ -25,7 +26,13 @@ class Contact extends Component {
     }
 
     handleSubmit(e) {
-        alert(JSON.stringify(this.state));
+        // console.log("VALUES --------------- VALUES")
+
+        // console.log(this.state)
+        const picked = (({ first_name, last_name,email,tel,box,select,feedback }) => ({ first_name, last_name,email,tel,box,select,feedback }))(this.state);
+
+        this.props.postFeedback(picked);
+        // alert(JSON.stringify(this.state));
         e.preventDefault();
     }
 
@@ -54,7 +61,7 @@ class Contact extends Component {
             email: ''
         };
 
-        if (this.state.touched.firstname && firstname.length < 3)
+        if (this.state.touched.firstname && firstname.length < 3 )
             errors.firstname = 'First Name should be >= 3 characters';
         else if (this.state.touched.firstname && firstname.length > 10)
             errors.firstname = 'First Name should be <= 10 characters';
@@ -77,7 +84,6 @@ class Contact extends Component {
 
     render() {
         const errors = this.validate(this.state.first_name, this.state.last_name, this.state.tel, this.state.email);
-
         return (
             <div className="container">
                 <div className="row mt-5">

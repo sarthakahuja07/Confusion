@@ -9,7 +9,7 @@ import Footer from './FooterComponent'
 import About from './AboutComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addComment, fetchDishes, fetchComments, fetchLeaders, fetchPromotions } from '../redux/actionCreator'
+import { addComment, fetchDishes, fetchComments, fetchLeaders, fetchPromotions, postFeedback } from '../redux/actionCreator'
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
@@ -18,7 +18,9 @@ const mapStateToProps = (state) => {
 		dishes: state.dishes,
 		comments: state.comments,
 		promotions: state.promotions,
-		leaders: state.leaders
+		leaders: state.leaders,
+		feedback: state.feedback
+
 	};
 }
 
@@ -39,6 +41,10 @@ function mapDispatchToProps(dispatch) {
 		fetchLeaders: () => {
 			dispatch(fetchLeaders());
 		},
+		postFeedback: (feedback) => {
+            dispatch(postFeedback(feedback));
+        }
+
 
 	};
 }
@@ -95,6 +101,14 @@ function Main(props) {
 				leaderErr={props.leaders.err} />
 		);
 	}
+	function ContactPage() {
+        return (
+            <Contact postFeedback={props.postFeedback}
+            />
+
+        );
+    }
+
 	return (
 		<div >
 			<React.Fragment>
@@ -106,7 +120,7 @@ function Main(props) {
 						<Switch>
 							<Route path="/home" component={() => HomePage()} ></Route>
 							<Route exact path="/menu" component={() => MenuPage()} ></Route>
-							<Route exact path="/contactus" component={() => <Contact />} ></Route>
+							<Route exact path="/contactus" component={() => ContactPage()} ></Route>
 							<Route path='/menu/:dishId' component={DishDetailPage}></Route>
 							<Route path='/aboutus' component={() => AboutPage()}></Route>
 							<Redirect to='/home'> </Redirect>

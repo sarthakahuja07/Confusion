@@ -8,7 +8,7 @@ import About from './AboutComponent'
 import Footer from './FooterComponent'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addComment, fetchDishes, fetchComments, fetchLeaders, fetchPromotions } from '../redux/actionCreator'
+import { addComment, fetchDishes, fetchComments, fetchLeaders, fetchPromotions, postFeedback } from '../redux/actionCreator'
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 function mapStateToProps(state) {
@@ -16,7 +16,8 @@ function mapStateToProps(state) {
         dishes: state.dishes,
         comments: state.comments,
         promotions: state.promotions,
-        leaders: state.leaders
+        leaders: state.leaders,
+        feedback: state.feedback
     };
 }
 
@@ -38,6 +39,9 @@ function mapDispatchToProps(dispatch) {
         fetchLeaders: () => {
             dispatch(fetchLeaders());
         },
+        postFeedback: (feedback) => {
+            dispatch(postFeedback(feedback));
+        }
 
     };
 }
@@ -84,8 +88,7 @@ class Main extends Component {
     }
 
     DishDetailPage = ({ match }) => {
-        console.log("------------------------------")
-        console.log(this.props.comments.comments)
+     
         return (
             <DishDetail dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
                 comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
@@ -106,6 +109,15 @@ class Main extends Component {
         );
     }
 
+    ContactPage() {
+        return (
+            <Contact postFeedback={this.props.postFeedback}
+            />
+
+        );
+    }
+
+
     render() {
         return (
             <React.Fragment>
@@ -116,7 +128,7 @@ class Main extends Component {
                         <Switch>
                             <Route path="/home" component={() => this.HomePage()} ></Route>
                             <Route exact path="/menu" component={() => this.MenuPage()} ></Route>
-                            <Route exact path="/contactus" component={() => <Contact />} ></Route>
+                            <Route exact path="/contactus" component={() => this.ContactPage()} ></Route>
                             <Route path='/menu/:dishId' component={this.DishDetailPage}></Route>
                             <Route path='/aboutus' component={() => this.AboutPage()}></Route>
                             <Redirect to='/home'> </Redirect>

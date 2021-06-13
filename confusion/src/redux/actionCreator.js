@@ -202,3 +202,15 @@ export const fetchLeaders = () => (dispatch) => {
 		})
 
 }
+
+export const postFeedback=(feedback)=>{
+	
+	return {
+		
+		type: ActionTypes.Post_Feedback,
+		payload: {
+			feedback:feedback
+		}
+	}
+
+}

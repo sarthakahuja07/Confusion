@@ -15,3 +15,5 @@ export const Leaders_Failed="Leaders_Failed"
 export const Promotions_Loading = "Promotions_Loading"
 export const Add_Promotions = "Add_Promotions"
 export const Promotions_Failed="Promotions_Failed"
+
+export const Post_Feedback= "PostFeedback"

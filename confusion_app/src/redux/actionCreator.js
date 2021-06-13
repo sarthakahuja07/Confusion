@@ -1,8 +1,5 @@
 import * as ActionTypes from './actionTypes'
-import DISHES from '../shared/dishes';
-import LEADERS from '../shared/leaders';
-import PROMOTIONS from '../shared/promotions';
-import COMMENTS from '../shared/comments';
+
 import baseUrl from '../shared/baseUrl'
 import axios from 'axios';
 

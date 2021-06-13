@@ -241,6 +241,14 @@
       "author": "agaggag",
       "date": "2021-06-13T12:48:14.763Z",
       "id": 24
+    },
+    {
+      "dishId": 1,
+      "rating": "5",
+      "comment": "my favvvvv",
+      "author": "Sarthak Ahuja",
+      "date": "2021-06-13T15:07:53.228Z",
+      "id": 25
     }
   ],
   "promotions": [
@@ -312,6 +320,16 @@
       "select": "Tel.",
       "feedback": "Everything working fine",
       "id": 2
+    },
+    {
+      "first_name": "Sarthak ",
+      "last_name": "Ahuja",
+      "email": "sarthak.ahuja0007@gmail.com",
+      "tel": "9718253271",
+      "box": false,
+      "select": "tel",
+      "feedback": "final check 1",
+      "id": 3
     }
   ]
 }

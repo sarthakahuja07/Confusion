@@ -13,6 +13,23 @@ import FadeIn from 'react-fade-in';
 
 function DishDetail(props) {
 
+	const comments = props.comments.map((comment) => {
+		var d = new Date(comment.date);
+		return (
+			
+				<div className="mt-2" key={comment.id}>
+					<ListGroupItem >
+						<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
+						<ListGroupItemText>
+							--{comment.author} , {d.toUTCString()}
+						</ListGroupItemText>
+					</ListGroupItem>
+				</div>
+			
+
+		)
+	});
+	
 	function renderDish() {
 
 		if (props.isDishLoading) {
@@ -60,20 +77,7 @@ function DishDetail(props) {
 				</div>
 			);
 		} else {
-			const comments = props.comments.map((comment) => {
-				var d = new Date(comment.date);
-				console.log(d);
-				return (
-					<div className="mt-2" key={comment.id}>
-						<ListGroupItem >
-							<ListGroupItemHeading>{comment.comment}</ListGroupItemHeading>
-							<ListGroupItemText>
-								--{comment.author} , {d.toUTCString()}
-							</ListGroupItemText>
-						</ListGroupItem>
-					</div>
-				)
-			});
+
 
 			comments.push(<CommentForm dishId={props.dish.id}
 				addComment={props.addComment} />)
@@ -83,7 +87,6 @@ function DishDetail(props) {
 				<div className="col-12 col-md-6">
 					<h4> Comments </h4>
 					<FadeIn>
-
 						{comments}
 					</FadeIn>
 				</div>
@@ -94,50 +97,25 @@ function DishDetail(props) {
 	}
 
 
-	if (props.isLoading) {
-		return (
-			<div className="container">
-				<div className="row mt-5">
-					<Breadcrumb>
-						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-						<BreadcrumbItem active></BreadcrumbItem>
 
-					</Breadcrumb>
-					<div className="col-12">
-						<hr />
-					</div>
-				</div>
-				<div className="row mt-5">
-					<LoadingComponent></LoadingComponent>
+	return (
+		<div className="container">
+			<div className="row mt-5">
+				<Breadcrumb>
+					<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+					<BreadcrumbItem active>{props.dish ? props.dish.name : ""}</BreadcrumbItem>
+				</Breadcrumb>
+				<div className="col-12">
+					<h3>{props.dish ? props.dish.name : ""}</h3>
+					<hr />
 				</div>
 			</div>
-		)
-
-
-	} else if (props.err != null) {
-		return (
-			<h4>{props.err}</h4>
-		)
-	} else {
-		return (
-			<div className="container">
-				<div className="row mt-5">
-					<Breadcrumb>
-						<BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-						<BreadcrumbItem active>{props.dish ? props.dish.name : ""}</BreadcrumbItem>
-					</Breadcrumb>
-					<div className="col-12">
-						<h3>{props.dish ? props.dish.name : ""}</h3>
-						<hr />
-					</div>
-				</div>
-				<div className="row mt-5">
-					{renderDish()}
-					{renderComments()}
-				</div>
+			<div className="row mt-5">
+				{renderDish()}
+				{renderComments()}
 			</div>
-		);
-	}
+		</div>
+	);
 
 
 }
